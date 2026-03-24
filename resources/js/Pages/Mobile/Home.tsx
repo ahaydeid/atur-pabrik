@@ -1,8 +1,12 @@
 import { Head, Link } from '@inertiajs/react';
 import { Boxes, ChevronRight, Factory, Smartphone, Sparkles } from 'lucide-react';
+import Swal from 'sweetalert2';
 
-import StackAlertButton from '../../components/StackAlertButton';
-import type { AppPageProps } from '../../types';
+type AppPageProps = {
+    appName: string;
+    laravelVersion: string;
+    phpVersion: string;
+};
 
 const quickActions = [
     'Check stok bahan baku',
@@ -29,6 +33,16 @@ const highlights = [
 ];
 
 export default function Home({ appName, laravelVersion, phpVersion }: AppPageProps) {
+    const showWelcomeAlert = async () => {
+        await Swal.fire({
+            title: 'Stack siap dipakai',
+            text: 'Mobile app sudah aktif dengan layout yang dikunci ke pengalaman mobile.',
+            icon: 'success',
+            confirmButtonText: 'Lanjut',
+            confirmButtonColor: '#d97706',
+        });
+    };
+
     return (
         <>
             <Head title="Mobile App">
@@ -57,10 +71,13 @@ export default function Home({ appName, laravelVersion, phpVersion }: AppPagePro
                             </p>
                         </div>
 
-                        <StackAlertButton
+                        <button
                             className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-amber-600 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-amber-700"
-                            text="Mobile app sudah aktif dengan layout yang dikunci ke pengalaman mobile."
-                        />
+                            onClick={showWelcomeAlert}
+                            type="button"
+                        >
+                            Tes SweetAlert
+                        </button>
 
                         <div className="space-y-3">
                             {quickActions.map((action) => (

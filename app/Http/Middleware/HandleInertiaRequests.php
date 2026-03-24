@@ -37,7 +37,20 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            //
+            'auth' => [
+                'user' => [
+                    'email' => 'ahadi@aturpabrik.test',
+                    'peran' => 'plant manager',
+                    'profil' => [
+                        'nama' => 'Ahadi',
+                        'foto_profil' => null,
+                    ],
+                ],
+            ],
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error' => fn () => $request->session()->get('error'),
+            ],
         ];
     }
 }
